@@ -33,7 +33,7 @@ $('#submit').on("click", function(){
 	}
 	else{
 		$("#matchName").text("Please fill out my survery!");
-		$('#matchImg').attr("src", "http://blog.westmonroepartners.com/wp-content/uploads/2016/04/employee-engagement.jpg");
+		$('#matchImg').attr("src", "http://www.mayersmemorial.com/pictures/content/122253.jpg");
 		$("#resultsModal").modal('toggle');
 	}
 });

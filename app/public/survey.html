@@ -124,9 +124,9 @@
 		<br>
 		<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>Submit</button>
 		<hr>
-		<div class="container">
+		<h3 class="text-center">
 			<p><a href="/api/friends">A.P.I. Friends List</a></p>
-		</div>
+		</h3>
 	</div>
 	<div id="resultsModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -145,6 +145,46 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="survey.js"></script>
+	<script type="text/javascript">
+		$('#submit').on("click", function(){
+	let servername = location.origin;
+	let formFilled = true;
+	$('.form-control').each(function(e){
+		if(!$(this).val()){
+			formFilled = false
+		}
+	});
+	if(formFilled){
+		let newFriend = {
+			"name": $('#name').val() ,
+			"photo": $('#photo').val() ,
+			"scores": [
+						$('#Q1').val(),
+						$('#Q2').val(),
+						$('#Q3').val(),
+						$('#Q4').val(),
+						$('#Q5').val(),
+						$('#Q6').val(),
+						$('#Q7').val(),
+						$('#Q8').val(),
+						$('#Q9').val(),
+						$('#Q10').val()
+					]
+		};
+		$.post(servername + "/api/friends", newFriend)
+		.done(function(res){
+			console.log(res);
+			$("#matchName").text(res.name);
+			$('#matchImg').attr("src", res.photo);
+			$("#resultsModal").modal('toggle');
+		});
+	}
+	else{
+		$("#matchName").text("Please fill out my survery!");
+		$('#matchImg').attr("src", "http://www.mayersmemorial.com/pictures/content/122253.jpg");
+		$("#resultsModal").modal('toggle');
+	}
+});
+	</script>
 </body>
 </html>
